@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script>    
+    var uzduotis = "<strong>Kokie formos elementai užrašomi žyme &lt;input&gt;:</strong>";    
+    var variantai = ["teksto eilutė (text)","tekstinis langas (textarea)","jungiklis (checkbox)","išrinkimo sąrašas (select)","patvirtinimo mygtukas (button)","formos duomenų atstatymo mygtukas (reset)"];
+   
+    function rodyk(){
+      var txt='<form name="testas">' + uzduotis + '<br>'; 
+        for (var i = 0; i < variantai.length; i++){
+          txt += '<input type="checkbox">' + variantai[i] + '<br>';
+        }
+      txt += '<input type="button" value="Atsakyti" onClick="myFunction()"></form>';
+      document.getElementById('turinys').innerHTML=txt;
+    }
+
+    function shuffle() {
+      var randomIndex, temporaryIndex;
+      for (var i = variantai.length - 1; i > 0; i--) {
+        randomIndex = Math.floor(Math.random() * (i + 1));
+        temporaryIndex = variantai[i];
+        variantai[i] = variantai[randomIndex];
+        variantai[randomIndex] = temporaryIndex;
+      }
+    }
+
+    function myFunction(){      
+      var atsakymaiTeisingi=0;
+      var atsakymaiNeteisingi=0;
+      var atsakymas="";
+      for (var i = 0; i < variantai.length; i++){
+        if(document.testas.elements[i].checked && ((variantai[i]=="teksto eilutė (text)")||(variantai[i]=="jungiklis (checkbox)")||
+          (variantai[i]=="patvirtinimo mygtukas (button)")||(variantai[i]=="formos duomenų atstatymo mygtukas (reset)"))){
+          atsakymaiTeisingi++; 
+          atsakymas+='<strong>'+variantai[i]+'</strong>, ';
+        } else if(document.testas.elements[i].checked){
+            atsakymas+='<strong style="color:red">'+ variantai[i]+'</strong>, ';
+	          atsakymaiNeteisingi++;
+          }
+      }
+      if(atsakymaiTeisingi==4 && atsakymaiNeteisingi==0){
+        document.getElementById('Start').innerHTML='Testas išlaikytas ('+ atsakymas+")";
+      }else{
+        document.getElementById('Start').innerHTML='Testas neišlaikytas ('+ atsakymas+")";
+      }            
+    }
+    
+    window.onload=shuffle();
+  </script>
+</head>
+<body onload="rodyk()">
+  <h1>Testukas</h1><hr>
+  <div id="turinys"></div>
+  <div id="Start"></div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+.pirmas {   
+    display: inline-block;   
+}
+.forma {
+    margin-bottom: 10px;
+}
+
+.forma label{
+    width: 160px;
+    float: left;
+    padding: 5px;
+}
+.forma1 {
+    margin-bottom: 10px;
+}
+
+.red{
+	color: red;
+}
+
+
+
